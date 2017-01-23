@@ -29,11 +29,11 @@ args = parser.parse_args()
 if os.path.exists('padock_photo_urls.pkl'):
     data = load_file('padock_photo_urls.pkl')
     for d in data:
-        print d['name'], d['padock_photo_url']
         params = d['padock_photo_url'].replace('http://', '').split('/')
         output_filename = '%s_%s' % (params[2], params[4])
         if args.output:
             output_filename = os.path.join(args.output, output_filename)
         if not os.path.exists(output_filename):
+            print 'Download', d['name'], d['padock_photo_url']
             download_image(d['padock_photo_url'], output_filename)
             sleep(0.1)
